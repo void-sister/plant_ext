@@ -1,6 +1,10 @@
 <?php
 
-use App\Http\Controllers\SiteController;
+use App\Http\Controllers\{
+    PlantController,
+    ProductController,
+    SiteController,
+};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,4 +18,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [SiteController::class, 'home']);
+Route::get('/', [SiteController::class, 'home'])->name('home');
+Route::get('/plants', [PlantController::class, 'index'])->name('plants.index');
+Route::get('/products/{category}', [ProductController::class, 'index'])->name('products.index');
