@@ -10,4 +10,12 @@ class ProductController extends Controller
 
         return view('shop.index');
     }
+
+    public function show($category, $product)
+    {
+        var_dump($category);
+        var_dump($product);
+
+        return view('shop.show');
+    }
 }

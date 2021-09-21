@@ -8,4 +8,10 @@ class PlantController extends Controller
     {
         return view('shop.index');
     }
+
+    public function show($plant)
+    {
+        var_dump($plant);
+        return view('shop.show');
+    }
 }
