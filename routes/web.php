@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [SiteController::class, 'home'])->name('home');
 
 Route::get('/plants', [PlantController::class, 'index'])->name('plants.index');
-Route::get('/plants/{plant}', [PlantController::class, 'show'])->name('plants.show');
+Route::get('/plants/{slug}', [PlantController::class, 'show'])->name('plants.show');
 
 Route::get('/products/{category}', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{category}/{product}', [ProductController::class, 'show'])->name('products.show');
