@@ -39,4 +39,40 @@ class PlantController extends Controller
 
         return view('shop.show');
     }
+
+    /**
+     * Add to cart specified plant.
+     *
+     * @param string $slug
+     * @param int $qty
+     * @return RedirectResponse
+     * @throws GuzzleException
+     */
+    public function addToCart(string $slug, int $qty = 1): RedirectResponse
+    {
+        $api = new ApiService();
+        $plant = $api->post('plant/getBySlug', [
+            'slug' => $slug
+        ]);
+
+        $cart = session()->get('cart', []);
+
+        if(isset($cart[$slug])) {
+            $cart[$slug]['quantity']++;
+        } else {
+            $cart[$slug] = [
+                'name' => $plant['plant_name'],
+                'quantity' => $qty,
+                'price' => $plant['price'],
+            ];
+        }
+
+        session()->put('cart', $cart);
+
+        if(!$cart) {
+            return redirect()->back()->with('error', 'Plant not added to cart');
+        }
+
+        return redirect()->back()->with('success', 'Plant added to cart successfully!');
+    }
 }
